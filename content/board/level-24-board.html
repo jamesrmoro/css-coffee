@@ -1,0 +1,42 @@
+<!-- level 24 -->
+<div
+	:class="count == 24 ? 'show' : 'hidden'"
+	class="level-24 level"
+	>
+	<div class="instructions text-white text-sm">
+		<p class="pb-3">Organize all the dishes at once using the CSS properties you've learned:</p>
+		<ul class="list-disc ml-10 space-y-1 mb-5">
+		    <li><code class="bg-gray-50/30 p-[2px]">justify-content</code></li>
+		    <li><code class="bg-gray-50/30 p-[2px]">align-items</code></li>
+		    <li><code class="bg-gray-50/30 p-[2px]">flex-direction</code></li>
+		    <li><code class="bg-gray-50/30 p-[2px]">order</code></li>
+		    <li><code class="bg-gray-50/30 p-[2px]">align-self</code></li>
+		    <li><code class="bg-gray-50/30 p-[2px]">flex-wrap</code></li>
+		    <li><code class="bg-gray-50/30 p-[2px]">align-content</code></li>
+		</ul>
+		<div class="relative mt-5">
+			<div class="bg-slate-200 h-[260px] relative rounded overflow-hidden p-2 pl-10">
+				<div class="line-numbers absolute top-0 left-0 h-full text-right bg-slate-600 w-[32px] p-[5px] text-sm leading-[25px]">
+                    <template x-for="number in 10">
+                        <div x-text="number"></div>
+                    </template>
+                </div>
+				<pre class="leading-[26px] text-slate-600 text-[14px]">.table {
+	display: flex;</pre>
+				<textarea
+				x-model="level_24"
+				spellcheck="false"
+				class="block ml-[35px] resize-none border-0 outline-0 text-slate-800 w-[calc(100%-35px)] h-[84px]"
+				@input="check(level_24,'24', levels[24].status)"
+				></textarea>
+				<pre class="leading-[26px] text-slate-600 text-[14px]">}</pre>
+
+				<button
+                :class="{ 'bg-red-700 opacity-100 animation hover:bg-red-500': levels[24].answer[0].status }"
+                class="translate pl-[20px] pr-[20px] pt-[7px] pb-[7px] rounded text-[16px] leading-[24px] text-white bg-slate-600 cursor-pointer absolute right-[20px] bottom-[20px]"
+                @click="if(levels[24].answer[0].status && levels[24].answer[1].status && levels[24].answer[2].status && levels[24].answer[3].status !=false){increment()}"
+                >Next</button>
+			</div>
+		</div>
+	</div>
+</div>

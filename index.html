@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Coffee - A game for learning CSS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#4e372f">
+    <meta name="theme-color" content="#4e372f">
+    <script src="js/alpine.min.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="build/style.css">
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body x-data="counter()" x-cloak>
+	<div
+	class="grid h-auto md:h-[100vh] grid-cols-1 md:grid-cols-2"
+	x-data="checkLevel()"
+	>
+		<section x-data="{ open: false }" class="p-4 md:p-8 bg-yellow-900">
+			<div class="header flex justify-between mb-4 flex-wrap md:flex-nowrap">
+				<div>
+					<div class="hidden">
+						<h2>Nível atual: <span id="current" class="font-bold" x-ref="status">1</span></h2>
+					</div>
+					<h1 class="mb-4 sm:mb-0 uppercase text-white text-4xl font-bold">CSS Coffee</h1>
+				</div>
+				<div
+				class="level-counter flex items-center justify-center relative">
+					<span
+					class="arrow w-[27px] h-[30px] inline-flex justify-center items-center bg-white/20 cursor-pointer"
+					x-on:click="decrement()"><svg fill="#fff" xmlns="http://www.w3.org/2000/svg" width="14" height="24" viewBox="0 0 24 24"><path d="M3 12l18-12v24z"/></svg></span>
+					<div
+					@click="open = !open"
+					@click.outside="open = false"
+					id="level-indicator" class="inline-flex w-[160px] h-[30px] justify-center items-center gap-[5px] bg-white/40 cursor-pointer hover:bg-white/60">
+						<span class="text-white">Level</span>
+						<span
+							id="level"
+							x-text="count"
+							class="text-white"
+						>1</span>
+						<span class="text-white">of</span>
+						<span class="text-white">24</span>
+						<span class="text-white">▾</span>
+					</div>
+					<span
+					class="arrow arrow w-[27px] h-[30px] inline-flex justify-center items-center bg-white/20 cursor-pointer"
+					x-on:click="increment()"><svg fill="#fff" xmlns="http://www.w3.org/2000/svg" width="24" height="14" viewBox="0 0 24 24"><path d="M21 12l-18 12v-24z"/></svg></span>
+					<div
+					class="hidden absolute top-[35px] z-50"
+					:class="{'show' : open, 'hidden' : !open}">
+						<div class="tooltip gap-[5px] mt-[12px] pt[13px] w-[165px]">
+							<div class="wrapper p-3.5 bg-slate-800 rounded-md">
+								<ul class="grid grid-cols-4 gap-[5px] after:bg-slate-800 after:content-[''] after:mx-auto after:left-0 after:right-0 after:top-[5px] after:absolute after:h-[20px] after:w-[20px]
+								after:rotate-45
+								after:bg-slate-800">
+									<template x-for="i in 24">
+										<li
+										x-on:click="level(this)"
+										class="border border-transparent text-center bg-slate-600 text-white h-[30px] border-2 w-[30px] cursor-pointer hover:border hover:border-2 hover:border-white rounded-full leading-[27px] text-[12px]"
+										:class="count == i ? 'bg-zinc-800 border border-2 border-white' : ''"
+										x-text="i"
+										></li>
+									</template>
+								</ul>
+								<span class="text-white text-center text-xs mx-auto w-full block cursor-pointer mt-2">Reset</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		    <template x-for="n in 24" :key="n">
+		        <div
+		        	x-data="{ board: true, content: '' }"
+		        	x-show="board"
+		        	x-init="fetch('content/board/level-' + n + '-board.html').then(response => response.text()).then(html => content = html)">
+		            <div x-html="content"></div>
+		        </div>
+		    </template>
+
+		</section>
+
+		<div class="levels">
+		    <template x-for="n in 24" :key="n">
+		        <div
+		        	x-data="{ level: true, content: '' }"
+		        	x-show="level"
+		        	x-init="fetch('content/set/level-' + n + '-set.html').then(response => response.text()).then(html => content = html)">
+		            <div x-html="content"></div>
+		        </div>
+		    </template>
+		</div>
+
+	</div>
+
+	<div
+		x-data="{ intro: true, introContent: '' }" x-show="intro"
+		x-init="fetch('content/intro.html').then(response => response.text()).then(html => introContent = html)">
+	    <div x-html="introContent"></div>
+	</div>
+
+	<script src="js/script.js"></script>
+</body>
+</html>

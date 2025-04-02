@@ -1,0 +1,33 @@
+<!-- level 19 -->
+<div
+	:class="count == 19 ? 'show' : 'hidden'"
+	class="level-19 level"
+	>
+	<div class="instructions text-white text-sm">
+		<p class="pb-3">Help the waiter organize the coffee cups to form three ordered columns on the table using a combination of <code class="bg-gray-50/30 p-[2px]">flex-direction</code>, <code class="bg-gray-50/30 p-[2px]">justify-content</code>, and <code class="bg-gray-50/30 p-[2px]">align-items</code>.</p>
+		<div class="relative mt-5">
+			<div class="bg-slate-200 h-[260px] relative rounded overflow-hidden p-2 pl-10">
+				<div class="line-numbers absolute top-0 left-0 h-full text-right bg-slate-600 w-[32px] p-[5px] text-sm leading-[25px]">
+                    <template x-for="number in 10">
+                        <div x-text="number"></div>
+                    </template>
+                </div>
+				<pre class="leading-[26px] text-slate-600 text-[14px]">.table {
+	display: flex;</pre>
+				<textarea
+				x-model="level_19"
+				spellcheck="false"
+				class="block ml-[35px] resize-none border-0 outline-0 text-slate-800 w-[calc(100%-35px)] h-[46px]"
+				@input="check(level_19,'19', levels[19].status)"
+				></textarea>
+				<pre class="leading-[26px] text-slate-600 text-[14px]">}</pre>
+
+				<button
+				:class="{ 'bg-red-700 opacity-100 animation hover:bg-red-500': levels[19].answer[0].status }"
+                class="translate pl-[20px] pr-[20px] pt-[7px] pb-[7px] rounded text-[16px] leading-[24px] text-white bg-slate-600 cursor-pointer absolute right-[20px] bottom-[20px]"
+                @click="if(levels[19].answer[0].status !=false){increment()}"
+                >Next</button>
+			</div>
+		</div>
+	</div>
+</div>

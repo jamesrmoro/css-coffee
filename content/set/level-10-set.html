@@ -1,0 +1,157 @@
+<!-- level 10 -->
+<div
+	:class="count == 10 ? 'show' : 'hidden'"
+	class="level-10 level bg-table-towel"
+	>
+	<section>
+		<div
+			class="relative h-[595px] md:h-[100vh] top-0"
+		>
+			<div
+			class="w-full h-full p-4 flex absolute left-0 z-20 right-0 gap-[15px]"
+			:class="{
+				'flex-row-reverse': levels[10].answer[0].status,
+				'justify-end': levels[10].answer[0].status
+			}"
+            :style="`${level_10}`"
+			>
+				<div class="flex items-center justify-center relative w-[95px] h-[95px]">
+					<div
+                        class="
+                            before:bg-black
+                            before:content-['']
+                            before:absolute
+                            before:w-[50px]
+                            before:h-[50px]
+                            before:top-[50%]
+                            before:left-[50%]
+                            before:rounded-full
+                            before:translate-x-[-50%]
+                            before:translate-y-[-50%]
+
+                            after:content-['']
+                            after:absolute
+                            after:h-[5px]
+                            after:top-[15px]
+                            after:left-[25px]
+                            after:rotate-[30deg]
+                            after:w-[20px]
+                            after:bg-neutral-500
+                            after:opacity-80
+                            after:rounded-[100%]
+
+                            w-[60px]
+                            h-[60px]
+                            rounded-full
+                            bg-white
+                            absolute
+                            flex
+                            text-center
+                            items-center
+                            justify-center
+                    ">
+						<div class="wave w-[10px] h-[10px] absolute left-[-10px] right-0 mx-auto top-[30px] bottom-0 rounded-full opacity-60 border-4 border-gray-300"></div>
+						<<div class="absolute w-[10px] h-[15px] bg-white rounded-[20%] top-0 bottom-0 left-[-7px] z-10 m-auto"></div>
+						<i class="text-white z-10 text-[10px] flex items-center absolute">Strong</i>
+					</div>
+				</div>
+				<div class="flex items-center justify-center relative w-[95px] h-[95px]">
+					<div
+                        class="
+                            before:bg-amber-900
+                            before:content-['']
+                            before:absolute
+                            before:w-[50px]
+                            before:h-[50px]
+                            before:top-[50%]
+                            before:left-[50%]
+                            before:rounded-full
+                            before:translate-x-[-50%]
+                            before:translate-y-[-50%]
+
+                            after:content-['']
+                            after:absolute
+                            after:h-[5px]
+                            after:top-[15px]
+                            after:left-[25px]
+                            after:rotate-[30deg]
+                            after:w-[20px]
+                            after:bg-amber-700
+                            after:opacity-80
+                            after:rounded-[100%]
+
+                            w-[60px]
+                            h-[60px]
+                            rounded-full
+                            bg-white
+                            absolute
+                            flex
+                            text-center
+                            items-center
+                            justify-center
+                    ">
+						<div class="wave w-[10px] h-[10px] absolute left-[-10px] right-0 mx-auto top-[30px] bottom-0 rounded-full opacity-60 border-4 border-gray-300"></div>
+						<<div class="absolute w-[10px] h-[15px] bg-white rounded-[20%] top-0 bottom-0 left-[-7px] z-10 m-auto"></div>
+						<i class="text-white z-10 text-[10px] flex items-center absolute">Medium</i>
+					</div>
+				</div>
+				<div class="flex items-center justify-center relative w-[95px] h-[95px]">
+					<div
+                        class="
+                            before:bg-stone-500
+                            before:content-['']
+                            before:absolute
+                            before:w-[50px]
+                            before:h-[50px]
+                            before:top-[50%]
+                            before:left-[50%]
+                            before:rounded-full
+                            before:translate-x-[-50%]
+                            before:translate-y-[-50%]
+
+                            after:content-['']
+                            after:absolute
+                            after:h-[5px]
+                            after:top-[15px]
+                            after:left-[25px]
+                            after:rotate-[30deg]
+                            after:w-[20px]
+                            after:bg-neutral-400
+                            after:opacity-80
+                            after:rounded-[100%]
+
+                            w-[60px]
+                            h-[60px]
+                            rounded-full
+                            bg-white
+                            absolute
+                            flex
+                            text-center
+                            items-center
+                            justify-center
+                    ">
+						<div class="wave w-[10px] h-[10px] absolute left-[-10px] right-0 mx-auto top-[30px] bottom-0 rounded-full opacity-60 border-4 border-gray-300"></div>
+						<div class="absolute w-[10px] h-[15px] bg-white rounded-[20%] top-0 bottom-0 left-[-7px] z-10 m-auto"></div>
+						<i class="text-white z-10 text-[10px] flex items-center absolute">Weak</i>
+					</div>
+				</div>
+			</div>
+
+			<div class="flex absolute top-0 left-0 w-full h-[595px] md:h-[100vh] p-[17px] gap-[15px] z-10 ow-reverse justify-end">
+				<div class="relative w-[95px] h-[95px] bg-white rounded-full">
+					<div class="w-full h-full bg-center bg-contain bg-no-repeat">
+						<i class="text-white z-10 text-[10px] flex-col flex absolute bottom-[-10px] left-0 right-0 m-auto text-center bg-black w-[50px] rounded-md">Strong</i>
+					</div>
+				</div>
+				<div class="relative w-[95px] h-[95px] bg-white rounded-full">
+					<i class="text-white z-10 text-[10px] flex-col flex absolute bottom-[-10px] left-0 right-0 m-auto text-center bg-amber-900 w-[50px] rounded-md">Medium</i>
+				</div>
+				<div class="relative w-[95px] h-[95px] bg-white rounded-full">
+					<div class="w-full h-full bg-center bg-contain bg-no-repeat">
+						<i class="text-white z-10 text-[10px] flex-col flex absolute bottom-[-10px] left-0 right-0 m-auto text-center bg-stone-500  w-[50px] rounded-md">Weak</i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
