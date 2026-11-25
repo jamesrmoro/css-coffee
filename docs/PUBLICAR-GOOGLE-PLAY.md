@@ -71,7 +71,7 @@ Respostas recomendadas:
 
 | Pergunta | Valor |
 |---|---|
-| Application ID (package) | `br.com.sprintcodes.csscoffee.app` (definitivo — nunca mude) |
+| Application ID (package) | `br.com.sprintcodes.css_coffee.app` (definitivo — nunca mude) |
 | App name / Launcher name | `CSS Coffee` |
 | Display mode | `standalone` |
 | Orientation | `default` (ou `portrait` se preferir só retrato) |
@@ -102,7 +102,7 @@ Gera `app-release-bundle.aab` (para enviar ao Play) e `app-release-signed.apk` (
   "relation": ["delegate_permission/common.handle_all_urls"],
   "target": {
     "namespace": "android_app",
-    "package_name": "br.com.sprintcodes.csscoffee.app",
+    "package_name": "br.com.sprintcodes.css_coffee.app",
     "sha256_cert_fingerprints": [
       "AA:BB:...:SHA256_DO_GOOGLE_PLAY",
       "CC:DD:...:SHA256_DA_SUA_CHAVE_DE_UPLOAD (opcional, para testar o APK local)"
