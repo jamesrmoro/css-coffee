@@ -15,6 +15,14 @@ Opções (qualquer uma funciona):
 Envie **o conteúdo da pasta `dist/`** para a raiz do site, incluindo a pasta oculta `.well-known/`.
 Se o jogo ficar numa subpasta (ex.: `seusite.com/csscoffee/`), o `assetlinks.json` ainda precisa estar em `seusite.com/.well-known/assetlinks.json`.
 
+### Deploy pelo Git do cPanel
+
+1. cPanel → **Git™ Version Control** → **Create** → clone `https://github.com/jamesrmoro/css-coffee.git` em `/home/SEU_USUARIO/repositories/css-coffee` (**não** dentro da pasta do site).
+2. Aba **Pull or Deploy** → **Update from Remote** (baixa o último commit) → **Deploy HEAD Commit**.
+3. O `.cpanel.yml` copia o conteúdo de `dist/` para `~/css-coffee.sprintcodes.com.br/` (pasta do subdomínio).
+
+A cada atualização: `npm run build` → commit → push → no cPanel, **Update from Remote** + **Deploy HEAD Commit**.
+
 O `dist/.htaccess` (servidor Apache/cPanel) já vem pronto:
 - força **HTTPS** e remove `www`;
 - libera `/.well-known/` e serve o `assetlinks.json` como `application/json` (com CORS);
