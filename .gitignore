@@ -1,0 +1,24 @@
+# Dependências e logs
+node_modules/
+npm-debug.log*
+*.log
+
+# Sistema / editores
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Segredos do app Android (NUNCA versionar)
+*.keystore
+*.jks
+*.p12
+*.pem
+.env
+.env.*
+
+# Projeto Android gerado pelo Bubblewrap, se criado aqui dentro
+android/
+app-release-*.aab
+app-release-*.apk

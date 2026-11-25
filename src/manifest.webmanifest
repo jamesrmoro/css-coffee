@@ -1,0 +1,146 @@
+{
+  "id": "./",
+  "name": "CSS Coffee – Learn CSS Flexbox",
+  "short_name": "CSS Coffee",
+  "description": "Learn CSS Flexbox by serving coffee: write CSS to move the cups onto their saucers. 24 levels, works offline.",
+  "lang": "en",
+  "dir": "ltr",
+  "start_url": "./?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#4e372f",
+  "theme_color": "#4e372f",
+  "categories": [
+    "education",
+    "games",
+    "developer"
+  ],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "prefer_related_applications": false,
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+  "screenshots": [
+    {
+      "src": "screenshots/narrow-1.webp",
+      "sizes": "720x1599",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "Level 1: learn justify-content by serving coffee"
+    },
+    {
+      "src": "screenshots/narrow-2.webp",
+      "sizes": "720x1599",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "Write CSS and watch the cups slide onto the saucers"
+    },
+    {
+      "src": "screenshots/narrow-3.webp",
+      "sizes": "720x1599",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "Tap shortcuts to build CSS without typing"
+    },
+    {
+      "src": "screenshots/narrow-4.webp",
+      "sizes": "720x1599",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "24 levels with saved progress"
+    },
+    {
+      "src": "screenshots/narrow-5.webp",
+      "sizes": "720x1599",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "order and align-self on single items"
+    },
+    {
+      "src": "screenshots/narrow-6.webp",
+      "sizes": "720x1599",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "flex-wrap: organize 15 cups in columns"
+    },
+    {
+      "src": "screenshots/wide-1.webp",
+      "sizes": "1920x1080",
+      "type": "image/webp",
+      "form_factor": "wide",
+      "label": "Level 1 on desktop"
+    },
+    {
+      "src": "screenshots/wide-2.webp",
+      "sizes": "1920x1080",
+      "type": "image/webp",
+      "form_factor": "wide",
+      "label": "Writing justify-content and align-items"
+    },
+    {
+      "src": "screenshots/wide-3.webp",
+      "sizes": "1920x1080",
+      "type": "image/webp",
+      "form_factor": "wide",
+      "label": "flex-direction and flex-wrap with 15 cups"
+    },
+    {
+      "src": "screenshots/wide-4.webp",
+      "sizes": "1920x1080",
+      "type": "image/webp",
+      "form_factor": "wide",
+      "label": "Level picker with saved progress"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Levels",
+      "short_name": "Levels",
+      "description": "Open the level picker",
+      "url": "./?levels=1",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}

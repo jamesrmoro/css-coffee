@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CSS Coffee – Learn CSS Flexbox with a game</title>
+<meta name="description" content="CSS Coffee is a free game to learn CSS Flexbox: write CSS to serve the coffee cups on their saucers. 24 levels, works offline.">
+<meta name="theme-color" content="#4e372f">
+<meta name="color-scheme" content="light">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="CSS Coffee">
+<meta property="og:title" content="CSS Coffee – Learn CSS Flexbox with a game">
+<meta property="og:description" content="Write CSS to serve the coffee cups on their saucers. 24 levels to master Flexbox.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="icons/og-image.jpg">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="preload" href="fonts/dynapuff-latin-600.woff2" as="font" type="font/woff2" crossorigin>
+<!--CSS-->
+</head>
+<body>
+<div class="app" id="app">
+  <div class="side">
+    <header class="topbar">
+      <h1 class="logo"><svg class="logo-cup" viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="12" width="6" height="8" rx="2" fill="#fff"/><circle cx="17" cy="16" r="14" fill="#fff"/><circle cx="17" cy="16" r="11" fill="#1c1410"/><ellipse cx="20" cy="10" rx="4" ry="1.4" transform="rotate(30 20 10)" fill="#fff" opacity=".4"/></svg>CSS Coffee</h1>
+      <div class="tools">
+        <button type="button" class="icon-btn" id="langBtn" aria-label="Mudar idioma para português">PT</button>
+        <button type="button" class="icon-btn" id="aboutBtn" aria-label="About" data-i18n-aria="about">?</button>
+      </div>
+      <nav class="level-nav" aria-label="Levels" data-i18n-aria="levels">
+        <button type="button" class="arrow" id="prevBtn" aria-label="Previous level" data-i18n-aria="prev">
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M17 2 5 12l12 10z" fill="currentColor"/></svg>
+        </button>
+        <button type="button" class="level-btn" id="levelBtn" aria-haspopup="dialog">
+          <span data-i18n="level">Level</span> <b id="levelNum">1</b> <span data-i18n="of">of</span> <span id="levelTotal">24</span>
+          <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M2 7h20L12 19z" fill="currentColor"/></svg>
+        </button>
+        <button type="button" class="arrow" id="nextArrow" aria-label="Next level" data-i18n-aria="nextLevel">
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 2l12 10L7 22z" fill="currentColor"/></svg>
+        </button>
+      </nav>
+      <div class="progress" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+    </header>
+
+    <section class="panel" aria-labelledby="levelNum">
+      <div class="instr-wrap" id="instrWrap">
+        <div class="instructions" id="instructions"></div>
+        <button type="button" class="instr-toggle" id="instrToggle" aria-controls="instructions" aria-expanded="true"></button>
+      </div>
+
+      <div class="editor">
+        <div class="code" id="codeBox">
+          <div class="gutter" id="gutter" aria-hidden="true"></div>
+          <div class="code-body">
+            <pre class="fixed" id="codeBefore"></pre>
+            <label for="code" class="sr-only" data-i18n="editorLabel">Type your CSS here</label>
+            <textarea id="code" class="code-input" rows="1" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" enterkeyhint="enter" wrap="off"></textarea>
+            <pre class="fixed" id="codeAfter"></pre>
+          </div>
+          <button type="button" class="btn-next" id="nextBtn" disabled data-i18n="next">Next</button>
+        </div>
+        <div class="chips" id="chips" aria-label="Shortcuts"></div>
+        <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </div>
+
+  <section class="stage" id="stage" aria-label="Table">
+    <div class="board-wrap" id="boardWrap">
+      <div class="board" id="board">
+        <div class="layer saucers" id="saucers" aria-hidden="true"></div>
+        <div class="layer cups" id="cups" aria-hidden="true"></div>
+      </div>
+    </div>
+    <ul class="legend" id="legend" aria-hidden="true"></ul>
+  </section>
+</div>
+
+<!-- Seletor de níveis -->
+<dialog class="modal" id="levelsDlg" aria-labelledby="levelsTitle">
+  <form method="dialog" class="modal-box">
+    <h2 id="levelsTitle" data-i18n="levels">Levels</h2>
+    <div class="level-grid" id="levelGrid"></div>
+    <div class="modal-actions">
+      <button type="button" class="btn-link" id="resetBtn" data-i18n="reset">Reset progress</button>
+      <button class="btn" value="close" data-i18n="close" autofocus>Close</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Confirmação de reset -->
+<dialog class="modal" id="resetDlg" aria-labelledby="resetTitle">
+  <form method="dialog" class="modal-box small">
+    <h2 id="resetTitle" data-i18n="resetTitle">Reset progress?</h2>
+    <p data-i18n="resetText">All solved levels and answers will be erased.</p>
+    <div class="modal-actions">
+      <button class="btn-link" value="cancel" data-i18n="cancel" autofocus>Cancel</button>
+      <button class="btn danger" value="confirm" data-i18n="resetConfirm">Reset</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Sobre -->
+<dialog class="modal" id="aboutDlg" aria-labelledby="aboutTitle">
+  <form method="dialog" class="modal-box">
+    <h2 id="aboutTitle" data-i18n="aboutTitle">About CSS Coffee</h2>
+    <div class="about" data-i18n-html="aboutHtml"></div>
+    <div class="modal-actions">
+      <button class="btn" value="close" data-i18n="close" autofocus>Close</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Vitória -->
+<dialog class="modal" id="winDlg" aria-labelledby="winTitle">
+  <form method="dialog" class="modal-box win">
+    <div class="win-cup" aria-hidden="true"></div>
+    <h2 id="winTitle" data-i18n="winTitle">You served every coffee!</h2>
+    <p id="winText"></p>
+    <div class="modal-actions">
+      <button type="button" class="btn-link" id="winLevelsBtn" data-i18n="levels">Levels</button>
+      <button class="btn" value="close" data-i18n="keepPlaying" autofocus>Keep playing</button>
+    </div>
+  </form>
+</dialog>
+
+<noscript><p class="noscript">CSS Coffee needs JavaScript to run.</p></noscript>
+<!--JS-->
+</body>
+</html>

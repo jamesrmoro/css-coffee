@@ -1,46 +1,79 @@
-<h1 align="center">
-☕<br>CSS Coffee - Learn CSS with a fun game!
-</h1>
+<h1 align="center">☕<br>CSS Coffee — aprenda CSS Flexbox jogando</h1>
 
-<p align="center">
-  <a href="https://storage.googleapis.com/my-bucket-28399d3/index.html" target="_blank">
-    <img src="http://www.sprintcodes.com.br/wp-content/uploads/2025/03/css-coffee.png" alt="CSS Coffee - A game for learning CSS">
-  </a>
-</p>
+CSS Coffee é um jogo educativo: o jogador escreve CSS para levar cada xícara até o pires do mesmo café. São **24 níveis** cobrindo `justify-content`, `align-items`, `flex-direction`, `order`, `align-self`, `flex-wrap`, `flex-flow` e `align-content`.
 
----
+Inspirado no Flexbox Froggy. Canal: **YouTube @sprintcodes**.
 
-## 🎯 What is CSS Coffee?
-
-**CSS Coffee** is an interactive game designed to help you learn **CSS Flexbox** in a fun and engaging way! ☕  
-If you've ever struggled with `display: flex`, this game will make it easy and intuitive for you.  
-
-💡 **Inspired by [Flexbox Froggy](https://flexboxfroggy.com/)**, but with a fresh approach for coffee lovers!  
+- 100% HTML, CSS e JavaScript puros (sem framework, sem dependências em produção)
+- Funciona **offline** (service worker) e é instalável (PWA) — pronto para **TWA / Google Play**
+- Português e inglês (detecta o idioma do aparelho; botão PT/EN no topo)
+- Progresso salvo no aparelho (localStorage) · nenhum dado coletado
+- Mobile e desktop · Lighthouse: Performance 97–100, Acessibilidade 100, Boas práticas 100, SEO 100
 
 ---
 
-## 🎮 Play Now
+## Estrutura
 
-<p align="center">
-  <a href="https://storage.googleapis.com/my-bucket-28399d3/index.html" target="_blank">
-    <img src="https://img.shields.io/badge/PLAY%20NOW-FF5733?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Play Now">
-  </a>
-</p>
+```
+css-coffee/
+├── src/                    ← CÓDIGO-FONTE (edite aqui)
+│   ├── index.html          estrutura da página (CSS/JS são embutidos no build)
+│   ├── css/style.css       todos os estilos (mobile first)
+│   ├── js/levels.js        os 24 níveis (instruções PT/EN, xícaras, solução)
+│   ├── js/i18n.js          textos da interface PT/EN
+│   ├── js/game.js          lógica do jogo
+│   ├── sw.js               service worker (offline)
+│   ├── manifest.webmanifest   (ícones, screenshots narrow/wide, atalhos — lido pelo PWABuilder/Bubblewrap)
+│   ├── screenshots/        telas usadas no manifest (instalação PWA/TWA)
+│   ├── privacy.html        política de privacidade (obrigatória no Google Play)
+│   ├── .well-known/assetlinks.json   ← vínculo do domínio com o app Android (TWA)
+│   ├── fonts/ images/ icons/ favicon.ico robots.txt
+├── dist/                   ← PASTA PARA PUBLICAR (gerada pelo build, não edite)
+├── store-assets/           artes do Google Play (pt-BR e en-US)
+├── docs/
+│   ├── PUBLICAR-GOOGLE-PLAY.md   passo a passo TWA + textos da loja
+│   └── RELATORIO.md              relatório de tudo o que foi feito
+├── build.mjs               script de build
+└── package.json
+```
 
----
+## Rodar e gerar o build
 
-## 🚀 Built with
+Requisitos: Node.js 18+.
 
-### 🏗 Alpine JS  
-[![Alpine JS](https://img.shields.io/badge/Alpine%20JS-8BC0D0?style=for-the-badge&logo=alpinedotjs&logoColor=black)](https://alpinejs.dev/)
+```bash
+npm install        # instala o esbuild (só para o build)
+npm run build      # gera dist/ minificado
+npm start          # serve dist/ em http://localhost:5173
+```
 
-### 🎨 Tailwind CSS  
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+No WAMP, abra `http://localhost/projetos/css-coffee/dist/`.
 
----
+> O service worker só funciona em `https://` ou `localhost`. Ao mudar qualquer arquivo em `src/`, rode `npm run build` de novo: o nome do cache muda sozinho e os jogadores recebem a versão nova.
 
-## ☕ What do you think?
+## Como a validação funciona
 
-Want to be part of this project? I’d love to hear your feedback!  
-📢 Leave a comment on my latest video:  
-[![YouTube](https://img.shields.io/badge/LEAVE%20A%20COMMENT-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@jamesrmoro)
+A mesa tem duas camadas idênticas: os **pires** recebem a solução de referência e as **xícaras** recebem o CSS digitado. O nível é resolvido quando cada tipo de café ocupa exatamente a mesma posição dos pires daquele tipo. Por isso qualquer resposta equivalente é aceita (ex.: `flex-flow: column wrap` ou `flex-direction` + `flex-wrap`), e a mesa tem tamanho lógico fixo (500×520, escalada para caber na tela) para o resultado ser igual em qualquer aparelho.
+
+Só propriedades flexbox são aplicadas (lista branca); valores inválidos geram uma dica no editor.
+
+## Adicionar ou editar um nível
+
+Edite `src/js/levels.js`. Exemplo:
+
+```js
+{
+  cups: 'smw',                         // s = forte, m = médio, w = fraco
+  base: { 'flex-wrap': 'wrap' },       // CSS já presente na mesa (opcional)
+  target: '.table',                    // ou '.strong' / '.medium' / '.weak'
+  solution: { 'justify-content': 'center' },
+  props: ['justify-content'],          // atalhos mostrados no editor
+  text: { en: '<p>…</p>', pt: '<p>…</p>' }
+}
+```
+
+O total de níveis é calculado automaticamente. Rode o build e teste.
+
+## Publicar
+
+Veja **[docs/PUBLICAR-GOOGLE-PLAY.md](docs/PUBLICAR-GOOGLE-PLAY.md)**.

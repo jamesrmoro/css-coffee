@@ -1,25 +1,17 @@
 {
-  "name": "flexboxcoffee",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "css-coffee",
+  "version": "2.0.0",
+  "description": "CSS Coffee – learn CSS Flexbox with a game (PWA/TWA)",
   "scripts": {
-    "build": "tailwindcss -i src/style.css -o build/style.css",
-    "prod": "cross-env NODE_ENV=production postcss src/style.css -o build/style.min.css",
-    "watch": "postcss src/style.css -o build/style.css --watch"
+    "build": "node build.mjs",
+    "start": "npx --yes serve dist -l 5173"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "fs-extra": "^10.1.0",
-    "node-env": "^0.1.6",
-    "postcss": "^8.4.16"
-  },
   "devDependencies": {
-    "autoprefixer": "^10.4.8",
-    "cssnano": "^5.1.13",
-    "postcss-cli": "^10.0.0",
-    "tailwindcss": "^3.1.8"
-  }
+    "@fontsource/dynapuff": "^5.3.0",
+    "esbuild": "^0.24.2"
+  },
+  "private": true,
+  "type": "module"
 }
