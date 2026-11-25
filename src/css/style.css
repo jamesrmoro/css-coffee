@@ -328,6 +328,23 @@ button:disabled { cursor: default; }
   animation: tada 1s, pulse 2s infinite 1.2s;
 }
 
+/* Cabeçalho compacto: marca, níveis e ferramentas na mesma linha. */
+@media (max-width: 899px), (max-height: 519px) {
+  .topbar {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-areas: "logo nav tools";
+    gap: 4px;
+    padding: calc(6px + env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) 6px max(8px, env(safe-area-inset-left));
+  }
+  .logo { font-size: clamp(12px, 3.6vw, 20px); letter-spacing: 0; gap: 4px; }
+  .logo-cup { width: 20px; height: 20px; }
+  .tools { gap: 4px; }
+  .icon-btn { min-width: 32px; padding: 0 6px; font-size: 12px; }
+  .level-nav .arrow { width: 26px; flex: none; }
+  .level-btn { font-size: 12px; gap: 3px; padding: 0 4px; }
+  .level-btn svg { width: 8px; }
+}
+
 /* ---------- Desktop / tablet paisagem ---------- */
 @media (min-width: 900px) and (min-height: 520px) {
   body { overflow: hidden; }
