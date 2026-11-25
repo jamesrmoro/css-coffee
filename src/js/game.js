@@ -59,7 +59,7 @@
       lang: s.lang === 'pt' || s.lang === 'en' ? s.lang : defaultLang(),
       solved: Array.isArray(s.solved) ? s.solved.filter(function (n) { return n >= 1 && n <= TOTAL; }) : [],
       answers: s.answers && typeof s.answers === 'object' ? s.answers : {},
-      collapsed: s.collapsed === true
+      collapsed: true
     };
   }
   function save() {
@@ -86,7 +86,7 @@
     }).join('');
   }
 
-  // Instruções recolhidas (preferência salva; só tem efeito no celular)
+  // Começam recolhidas a cada abertura do jogo; só tem efeito no celular.
   function applyCollapsed() {
     el.instrWrap.classList.toggle('collapsed', state.collapsed);
     el.instrToggle.textContent = t(state.collapsed ? 'showInstr' : 'hideInstr');
