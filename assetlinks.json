@@ -1,0 +1,17 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "br.com.sprintcodes.csscoffee.app",
+      "sha256_cert_fingerprints": [
+        "0B:04:BA:19:CA:B5:F3:F1:DB:9E:80:66:AA:F2:C7:64:94:C0:2D:6A:07:EB:AB:86:CA:58:21:E2:41:CA:EA:75",
+        "2C:2B:4F:26:70:38:5D:00:03:56:84:93:11:49:4E:38:A7:EC:B0:C6:3F:46:4E:6E:6C:13:D1:25:78:13:51:C6",
+        "81:BF:E7:A3:66:7C:36:BE:9E:13:43:F7:B4:9E:7C:46:38:A0:EB:E5:F0:E7:8D:B7:0C:CE:7D:4C:58:69:0E:EF"
+      ]
+    }
+  }
+]
