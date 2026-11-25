@@ -75,7 +75,7 @@ O jogo foi reescrito do zero mantendo a ideia, o visual (toalha xadrez, xícaras
 
 ## Pendências que dependem de você
 1. Publicar `dist/` em https://css-coffee.sprintcodes.com.br/ (incluindo `.htaccess` e `.well-known`).
-2. Preencher o SHA-256 do Play Console em `src/.well-known/assetlinks.json` (o package `br.com.sprintcodes.css_coffee.app` já está lá).
+2. Preencher o SHA-256 do Play Console em `src/.well-known/assetlinks.json` (o package `br.com.sprintcodes.csscoffee.app` já está lá).
 3. Gerar o `.aab` com Bubblewrap e enviar ao Play Console.
 
 ## Arquivos antigos
