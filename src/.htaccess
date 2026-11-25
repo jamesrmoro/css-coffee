@@ -1,0 +1,80 @@
+# CSS Coffee — configuração Apache para https://css-coffee.sprintcodes.com.br/
+# (gerado pelo build a partir de src/.htaccess)
+
+Options -Indexes
+DirectoryIndex index.html
+AddDefaultCharset UTF-8
+
+# ---------- HTTPS obrigatório (TWA exige) ----------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # sem "www"
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+  # libera /.well-known (alguns servidores bloqueiam arquivos que começam com ponto)
+  RewriteRule ^\.well-known/ - [L]
+</IfModule>
+
+# Bloqueia outros arquivos ocultos (.git, .env etc.), mas não o .well-known
+<IfModule mod_rewrite.c>
+  RewriteCond %{REQUEST_URI} !^/\.well-known/
+  RewriteRule (^|/)\. - [F]
+</IfModule>
+
+# ---------- Tipos de arquivo ----------
+<IfModule mod_mime.c>
+  AddType application/manifest+json   .webmanifest
+  AddType application/json            .json
+  AddType text/javascript             .js
+  AddType image/webp                  .webp
+  AddType image/svg+xml               .svg
+  AddType font/woff2                  .woff2
+  AddType image/x-icon                .ico
+</IfModule>
+
+# ---------- Digital Asset Links (TWA) ----------
+<Files "assetlinks.json">
+  <IfModule mod_headers.c>
+    Header set Content-Type "application/json; charset=utf-8"
+    Header set Access-Control-Allow-Origin "*"
+    Header set Cache-Control "no-cache"
+  </IfModule>
+</Files>
+
+# ---------- Compressão ----------
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/css text/javascript application/javascript application/json application/manifest+json image/svg+xml
+</IfModule>
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json application/manifest+json image/svg+xml image/x-icon
+</IfModule>
+
+# ---------- Cache ----------
+# HTML, service worker e manifest: sempre conferir versão nova (o service worker cuida do offline)
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|webmanifest)$|^sw\.js$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  # Imagens, ícones e fonte: 30 dias
+  <FilesMatch "\.(webp|png|jpg|jpeg|svg|ico|woff2)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+  <Files "sw.js">
+    Header set Service-Worker-Allowed "/"
+  </Files>
+
+  # ---------- Segurança ----------
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+  Header always set Strict-Transport-Security "max-age=31536000" env=HTTPS
+</IfModule>
+
+# ---------- Página de erro ----------
+ErrorDocument 404 /index.html

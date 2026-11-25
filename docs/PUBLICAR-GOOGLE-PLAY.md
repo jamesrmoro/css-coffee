@@ -4,22 +4,33 @@ O app Android é uma **Trusted Web Activity**: um "invólucro" que abre o site e
 
 ## 1. Hospedagem — atenção
 
-Hoje o jogo está em `storage.googleapis.com/my-bucket-28399d3/`. **Esse endereço não serve para TWA**, porque o Android verifica o arquivo `https://SEU-DOMINIO/.well-known/assetlinks.json` na **raiz do domínio**, e na raiz de `storage.googleapis.com` você não pode colocar arquivos.
+Hoje o jogo está em `storage.googleapis.com/my-bucket-28399d3/`. **Esse endereço não serve para TWA**, porque o Android verifica o arquivo `https://css-coffee.sprintcodes.com.br/.well-known/assetlinks.json` na **raiz do domínio**, e na raiz de `storage.googleapis.com` você não pode colocar arquivos.
 
 Opções (qualquer uma funciona):
 
-- Subdomínio seu, ex.: `https://csscoffee.sprintcodes.com.br/` (no seu servidor atual)
+- Subdomínio seu, ex.: `https://css-coffee.sprintcodes.com.br/` ← **domínio escolhido**
 - Firebase Hosting, Netlify, Cloudflare Pages ou Vercel (grátis, HTTPS automático, aceitam domínio próprio)
 - Google Cloud Storage **com** domínio próprio + Load Balancer (mais complexo)
 
 Envie **o conteúdo da pasta `dist/`** para a raiz do site, incluindo a pasta oculta `.well-known/`.
 Se o jogo ficar numa subpasta (ex.: `seusite.com/csscoffee/`), o `assetlinks.json` ainda precisa estar em `seusite.com/.well-known/assetlinks.json`.
 
+O `dist/.htaccess` (servidor Apache/cPanel) já vem pronto:
+- força **HTTPS** e remove `www`;
+- libera `/.well-known/` e serve o `assetlinks.json` como `application/json` (com CORS);
+- tipos corretos para `.webmanifest`, `.webp`, `.woff2`;
+- compressão gzip/brotli; cache de 30 dias para imagens/fontes e `no-cache` para HTML, `sw.js` e manifest (atualizações chegam na hora);
+- bloqueia listagem de pastas e arquivos ocultos (`.git`, `.env`);
+- cabeçalhos de segurança (nosniff, Referrer-Policy, X-Frame-Options, Permissions-Policy, HSTS).
+
+> Se o servidor responder **erro 500** depois de subir o `.htaccess`, a hospedagem não permite a linha `Options -Indexes`: apague essa linha.
+> Ao enviar por FTP, ative "mostrar arquivos ocultos" para subir o `.htaccess` e a pasta `.well-known`.
+
 Checklist do servidor:
 - [ ] HTTPS ativo
-- [ ] `https://SEU-DOMINIO/.well-known/assetlinks.json` abre e responde com `Content-Type: application/json`
-- [ ] `https://SEU-DOMINIO/manifest.webmanifest` abre
-- [ ] `https://SEU-DOMINIO/privacy.html` abre (URL vai no Play Console)
+- [ ] `https://css-coffee.sprintcodes.com.br/.well-known/assetlinks.json` abre e responde com `Content-Type: application/json`
+- [ ] `https://css-coffee.sprintcodes.com.br/manifest.webmanifest` abre
+- [ ] `https://css-coffee.sprintcodes.com.br/privacy.html` abre (URL vai no Play Console)
 
 ## 2. Conferir o manifest (PWABuilder)
 
@@ -39,7 +50,7 @@ Você já tem o Bubblewrap configurado (pasta `~/.bubblewrap`). Em uma pasta vaz
 
 ```bash
 npm i -g @bubblewrap/cli
-bubblewrap init --manifest https://SEU-DOMINIO/manifest.webmanifest
+bubblewrap init --manifest https://css-coffee.sprintcodes.com.br/manifest.webmanifest
 ```
 
 Respostas recomendadas:
@@ -89,7 +100,7 @@ Gera `app-release-bundle.aab` (para enviar ao Play) e `app-release-signed.apk` (
 Dica: `bubblewrap fingerprint add <SHA256>` e `bubblewrap fingerprint generateAssetLinks` geram esse arquivo.
 
 4. `npm run build` e publique o `dist/` de novo.
-5. Teste: instale o app do teste interno. **Se aparecer uma barra de endereço no topo, o assetlinks está errado** (package ou SHA-256 diferente, ou arquivo inacessível). Valide em: `https://digitalassetlinks.googleapis.com/v1/statements:list?source.web.site=https://SEU-DOMINIO&relation=delegate_permission/common.handle_all_urls`
+5. Teste: instale o app do teste interno. **Se aparecer uma barra de endereço no topo, o assetlinks está errado** (package ou SHA-256 diferente, ou arquivo inacessível). Valide em: `https://digitalassetlinks.googleapis.com/v1/statements:list?source.web.site=https://css-coffee.sprintcodes.com.br&relation=delegate_permission/common.handle_all_urls`
 
 ## 5. Ficha da loja (Play Console)
 
@@ -174,7 +185,7 @@ Inspired by Flexbox Froggy. Follow @sprintcodes on YouTube.
 ### Demais formulários do Play Console
 
 - **Categoria:** App → Educação (ou Jogo → Educativo)
-- **Política de privacidade:** `https://SEU-DOMINIO/privacy.html` (contato: contato@sprintcodes.com.br)
+- **Política de privacidade:** `https://css-coffee.sprintcodes.com.br/privacy.html` (contato: contato@sprintcodes.com.br)
 - **Segurança dos dados:** "O app não coleta nem compartilha dados do usuário"
 - **Anúncios:** não contém anúncios
 - **Classificação de conteúdo (IARC):** responda "não" a violência, linguagem etc. → resultado Livre

@@ -28,7 +28,7 @@ html = html
 await rm(OUT, { recursive: true, force: true });
 await mkdir(OUT, { recursive: true });
 await writeFile(path.join(OUT, 'index.html'), html);
-for (const item of ['fonts', 'images', 'icons', '.well-known', 'favicon.ico', 'manifest.webmanifest', 'privacy.html', 'robots.txt', 'screenshots', '.nojekyll']) {
+for (const item of ['fonts', 'images', 'icons', '.well-known', 'favicon.ico', 'manifest.webmanifest', 'privacy.html', 'robots.txt', 'screenshots', '.nojekyll', '.htaccess']) {
   await cp(path.join(SRC, item), path.join(OUT, item), { recursive: true });
 }
 
@@ -42,7 +42,7 @@ async function walk(dir) {
   }
   return out;
 }
-const assets = ['./', ...(await walk(OUT)).filter((f) => !f.startsWith('.well-known') && !f.endsWith('.svg') || f === 'icons/icon.svg')
+const assets = ['./', ...(await walk(OUT)).filter((f) => !f.startsWith('.well-known') && f !== '.htaccess' && f !== '.nojekyll' && !f.endsWith('.svg') || f === 'icons/icon.svg')
   .filter((f) => !f.includes('og-image') && !f.startsWith('screenshots/') && f !== 'robots.txt' && !f.endsWith('.txt'))];
 const sw = (await read('sw.js')).replaceAll('__VERSION__', version).replace('__ASSETS__', JSON.stringify(assets));
 await writeFile(path.join(OUT, 'sw.js'), (await transform(sw, { minify: true })).code);

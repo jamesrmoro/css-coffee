@@ -57,6 +57,7 @@ O jogo foi reescrito do zero mantendo a ideia, o visual (toalha xadrez, xícaras
 - `manifest.webmanifest` completo: ícones 192/512 + *maskable*, cores, categorias, `display_override`, `launch_handler`, atalho “Levels” e **screenshots de instalação** (6 *narrow* de celular + 4 *wide* de desktop, com legenda) para o preview do PWABuilder/Chrome. Validado no Chrome sem erros de manifest.
 - `sw.js`: pré-carrega todos os arquivos, funciona 100% offline, atualiza sozinho a cada build.
 - `.well-known/assetlinks.json` (modelo — preencher package e SHA-256 do Play).
+- `.htaccess` para Apache (HTTPS, `.well-known` liberado, MIME, cache, compressão, segurança) — testado em Apache 2.4.
 - `privacy.html` bilíngue (exigida pelo Google Play).
 - Guia passo a passo: `docs/PUBLICAR-GOOGLE-PLAY.md` (Bubblewrap, assetlinks, ficha da loja, textos prontos PT/EN, formulários).
 
@@ -73,7 +74,7 @@ O jogo foi reescrito do zero mantendo a ideia, o visual (toalha xadrez, xícaras
 - Lighthouse mobile: 97–100 / 100 / 100 / 100.
 
 ## Pendências que dependem de você
-1. **Domínio próprio com HTTPS** (o bucket `storage.googleapis.com` não aceita o `assetlinks.json` na raiz) — ver guia, seção 1.
+1. Publicar `dist/` em https://css-coffee.sprintcodes.com.br/ (incluindo `.htaccess` e `.well-known`).
 2. Preencher `src/.well-known/assetlinks.json` com o package e o SHA-256 do Play Console.
 3. Gerar o `.aab` com Bubblewrap e enviar ao Play Console.
 

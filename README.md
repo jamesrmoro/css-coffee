@@ -27,6 +27,7 @@ css-coffee/
 │   ├── screenshots/        telas usadas no manifest (instalação PWA/TWA)
 │   ├── privacy.html        política de privacidade (obrigatória no Google Play)
 │   ├── .well-known/assetlinks.json   ← vínculo do domínio com o app Android (TWA)
+│   ├── .htaccess           Apache: HTTPS, MIME, cache, compressão, segurança
 │   ├── fonts/ images/ icons/ favicon.ico robots.txt
 ├── dist/                   ← PASTA PARA PUBLICAR (gerada pelo build, não edite)
 ├── store-assets/           artes do Google Play (pt-BR e en-US)
@@ -36,6 +37,8 @@ css-coffee/
 ├── build.mjs               script de build
 └── package.json
 ```
+
+Site: **https://css-coffee.sprintcodes.com.br/**
 
 ## Rodar e gerar o build
 
