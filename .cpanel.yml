@@ -1,8 +1,9 @@
 ---
-# Deploy automático do cPanel (Git Version Control → "Deploy HEAD Commit").
-# Copia SOMENTE o conteúdo de dist/ (incluindo .htaccess e .well-known) para a pasta do subdomínio.
+# Deploy do cPanel (Git Version Control → "Deploy HEAD Commit").
+# - Repositório clonado em ~/repositories/css-coffee: copia o conteúdo de dist/ para a pasta do subdomínio.
+# - Repositório clonado direto na pasta do subdomínio: não copia nada (o .htaccess da raiz já serve o dist/).
 deployment:
   tasks:
-    - export DEPLOYPATH=$HOME/css-coffee.sprintcodes.com.br/
+    - export DEPLOYPATH=$HOME/css-coffee.sprintcodes.com.br
     - /bin/mkdir -p $DEPLOYPATH
-    - /bin/cp -R dist/. $DEPLOYPATH
+    - if [ "$(pwd -P)" != "$(cd $DEPLOYPATH && pwd -P)" ]; then /bin/cp -R dist/. $DEPLOYPATH/; fi

@@ -1,0 +1,32 @@
+# CSS Coffee — usado quando o repositório Git é clonado DIRETO na pasta do site.
+# Serve o conteúdo de dist/ como se estivesse na raiz (sem copiar nada).
+# Ex.: https://css-coffee.sprintcodes.com.br/ → dist/index.html
+#      /.well-known/assetlinks.json → dist/.well-known/assetlinks.json
+
+Options -Indexes
+DirectoryIndex index.html
+
+# Pastas internas do repositório (vale mesmo se a pasta tiver .htaccess próprio)
+<IfModule mod_alias.c>
+  RedirectMatch 404 ^/(\.git|src|docs|store-assets|node_modules)(/|$)
+  RedirectMatch 404 ^/(build\.mjs|package(-lock)?\.json|README\.md|\.cpanel\.yml|\.gitignore)$
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # HTTPS obrigatório
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Arquivos internos do repositório nunca ficam públicos
+  RewriteRule ^(\.git|src|docs|store-assets|node_modules)(/|$) - [F,L]
+  RewriteRule ^(build\.mjs|package(-lock)?\.json|README\.md|\.cpanel\.yml|\.gitignore)$ - [F,L]
+
+  # Já está em dist/: não reescreve de novo
+  RewriteRule ^dist/ - [L]
+
+  # Todo o resto é servido a partir de dist/
+  RewriteRule ^(.*)$ dist/$1 [L]
+</IfModule>

@@ -17,11 +17,17 @@ Se o jogo ficar numa subpasta (ex.: `seusite.com/csscoffee/`), o `assetlinks.jso
 
 ### Deploy pelo Git do cPanel
 
-1. cPanel → **Git™ Version Control** → **Create** → clone `https://github.com/jamesrmoro/css-coffee.git` em `/home/SEU_USUARIO/repositories/css-coffee` (**não** dentro da pasta do site).
-2. Aba **Pull or Deploy** → **Update from Remote** (baixa o último commit) → **Deploy HEAD Commit**.
-3. O `.cpanel.yml` copia o conteúdo de `dist/` para `~/css-coffee.sprintcodes.com.br/` (pasta do subdomínio).
+Funciona de dois jeitos (os dois já estão prontos no repositório):
 
-A cada atualização: `npm run build` → commit → push → no cPanel, **Update from Remote** + **Deploy HEAD Commit**.
+**A) Repositório clonado direto na pasta do subdomínio** (`~/css-coffee.sprintcodes.com.br`)
+- O `.htaccess` da **raiz do repositório** serve o conteúdo de `dist/` como se estivesse na raiz: `/` → `dist/index.html`, `/.well-known/assetlinks.json` → `dist/.well-known/assetlinks.json`.
+- `src/`, `docs/`, `store-assets/`, `.git`, `package.json` etc. ficam bloqueados (403/404).
+- Para atualizar: cPanel → **Git™ Version Control** → **Manage** → **Pull or Deploy** → **Update from Remote**. Pronto.
+
+**B) Repositório clonado em outra pasta** (ex.: `~/repositories/css-coffee`)
+- Clique em **Deploy HEAD Commit**: o `.cpanel.yml` copia o conteúdo de `dist/` para `~/css-coffee.sprintcodes.com.br/`.
+
+Em ambos os casos, o fluxo de atualização é: editar `src/` → `npm run build` → commit → push → **Update from Remote** (e **Deploy HEAD Commit** no caso B).
 
 O `dist/.htaccess` (servidor Apache/cPanel) já vem pronto:
 - força **HTTPS** e remove `www`;
@@ -71,7 +77,7 @@ Respostas recomendadas:
 | Orientation | `default` (ou `portrait` se preferir só retrato) |
 | Theme color / Background / Nav bar | `#4e372f` |
 | Start URL | `/?source=twa` |
-| Icon / Maskable icon | `icons/icon-512.png` / `icons/icon-maskable-512.png` (já no manifest) |
+| Icon / Maskable icon | `app-icons/icon-512.png` / `app-icons/icon-maskable-512.png` (já no manifest) |
 | Splash screen fade out | 300 |
 | Fallback | `customtabs` |
 | Play Billing / Location delegation | não |
