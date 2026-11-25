@@ -11,7 +11,7 @@ O jogo foi reescrito do zero mantendo a ideia, o visual (toalha xadrez, xícaras
 | CSS | Tailwind 26 KB (gerado de arquivos errados) | 11 KB |
 | Peso para abrir o jogo | ~470 KB + 3 fontes externas | ~100 KB (49 KB de HTML+CSS+JS) |
 | Offline / instalável | não | sim (service worker + manifest) |
-| Lighthouse (mobile) | — | Performance 97–100 · Acessibilidade 100 · Boas práticas 100 · SEO 100 |
+| Lighthouse (mobile) | — | Performance 97-100 · Acessibilidade 100 · Boas práticas 100 · SEO 100 |
 
 ## Erros encontrados no código antigo (todos corrigidos)
 
@@ -71,7 +71,7 @@ O jogo foi reescrito do zero mantendo a ideia, o visual (toalha xadrez, xícaras
 - Zero erros no console; progresso salvo corretamente.
 - Offline: com a rede desligada o jogo, a fonte, a toalha e a política de privacidade carregam do cache.
 - Botão voltar fecha diálogos; troca de idioma; tela de vitória.
-- Lighthouse mobile: 97–100 / 100 / 100 / 100.
+- Lighthouse mobile: 97-100 / 100 / 100 / 100.
 
 ## Pendências que dependem de você
 1. Publicar `dist/` em https://css-coffee.sprintcodes.com.br/ (incluindo `.htaccess` e `.well-known`).

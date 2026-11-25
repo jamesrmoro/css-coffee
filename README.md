@@ -8,7 +8,7 @@ Inspirado no Flexbox Froggy. Canal: **YouTube @sprintcodes**.
 - Funciona **offline** (service worker) e é instalável (PWA) — pronto para **TWA / Google Play**
 - Português e inglês (detecta o idioma do aparelho; botão PT/EN no topo)
 - Progresso salvo no aparelho (localStorage) · nenhum dado coletado
-- Mobile e desktop · Lighthouse: Performance 97–100, Acessibilidade 100, Boas práticas 100, SEO 100
+- Mobile e desktop · Lighthouse: Performance 97-100, Acessibilidade 100, Boas práticas 100, SEO 100
 
 ---
 

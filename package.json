@@ -1,7 +1,7 @@
 {
   "name": "css-coffee",
   "version": "2.0.0",
-  "description": "CSS Coffee – learn CSS Flexbox with a game (PWA/TWA)",
+  "description": "CSS Coffee - learn CSS Flexbox with a game (PWA/TWA)",
   "scripts": {
     "build": "node build.mjs",
     "start": "npx --yes serve dist -l 5173"
