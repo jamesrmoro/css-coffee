@@ -6,6 +6,13 @@
 Options -Indexes
 DirectoryIndex index.html
 
+<Files "assetlinks.json">
+  ForceType application/json
+  <IfModule mod_headers.c>
+    Header set Cache-Control "no-cache"
+  </IfModule>
+</Files>
+
 # Pastas internas do repositório (vale mesmo se a pasta tiver .htaccess próprio)
 <IfModule mod_alias.c>
   RedirectMatch 404 ^/(\.git|src|docs|store-assets|node_modules)(/|$)
@@ -23,6 +30,9 @@ DirectoryIndex index.html
   # Arquivos internos do repositório nunca ficam públicos
   RewriteRule ^(\.git|src|docs|store-assets|node_modules)(/|$) - [F,L]
   RewriteRule ^(build\.mjs|package(-lock)?\.json|README\.md|\.cpanel\.yml|\.gitignore)$ - [F,L]
+
+  # Serve a associação Android diretamente, sem depender da reescrita para dist/.
+  RewriteRule ^\.well-known/assetlinks\.json$ - [END]
 
   # Já está em dist/: não reescreve de novo
   RewriteRule ^dist/ - [L]
